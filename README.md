@@ -15,6 +15,7 @@ Below is a sketch of how such a system could work, the twists we’ve added to m
 
     Offline first, online when available – If the wider net returns, the same data-sync layer can ride conventional bandwidth unmodified.
 
+
 2 Taxes Without Bureaucrats
 
 Real villages need roads, a root cellar, maybe even a shared solar array. We graft a built-in VAT-style slice onto every transaction:
@@ -25,6 +26,8 @@ Giver logs 2 h  →
   0.05 h to “Community” fund
 
 Those fractions accumulate in dedicated treasury accounts and can later be “spent” as labour on collective projects—without spreadsheets or cash.
+
+
 3 Going Beyond One Village
 
 Each settlement (≈ 300–600 people) runs its own ledger, but treasuries can open trust-lines to neighbours:
@@ -35,6 +38,7 @@ Each settlement (≈ 300–600 people) runs its own ledger, but treasuries can o
 
     Exchange rates can float: 1 h of grain labour may equal 1.2 h of carpentry labour if demand shifts.
 
+
 4 People as Natural Gateways
 
 Nothing stops a single person holding balances in several villages:
@@ -44,12 +48,16 @@ Nothing stops a single person holding balances in several villages:
     Travel – Regular travellers’ phones become human-mesh “banks,” clearing small debts between settlements long before councils schedule bulk settlements.
 
 These multi-home members boost liquidity, share skills, and spread economic shocks across the network instead of letting them fester locally.
+
+
 5 Why This Matters To…
 Community	Benefit
 Preppers & homesteaders	Store food and fuel—now store cooperative credit.
 Amenities & eco-villages	Replace brittle SaaS barter apps with tooling you can audit, fork, and patch.
 Remote settlements	Where cash supply chains already fail, a phone-to-phone ledger keeps value fluid.
 Municipal resilience planners	Acts as a bottom-up continuity layer that still respects tax collection once the state reconnects.
+
+
 6 What’s Still Needed
 
     A reference implementation (Holochain, local-first CRDT, or an L2 smart contract—let’s test them all).
@@ -59,6 +67,7 @@ Municipal resilience planners	Acts as a bottom-up continuity layer that still re
     Cryptographic “selective disclosure” so users can prove balances without publishing every favour.
 
     Governance templates: credit limits, dispute resolution, code-change voting.
+
 
 7 An Open Invitation
 
