@@ -1,5 +1,7 @@
 # Commons-Credit
 
+(Image for Social Preview licenced by freepik.com)
+
 A Post-Money Ledger
 How Communities Can Keep Trading When the Grid Goes Dark
 
