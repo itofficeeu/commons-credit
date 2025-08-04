@@ -1,0 +1,87 @@
+# Technical Recap & Skill-Map
+
+A living outline of what “Common-Credit” will probably need. Initial thoughts - Changes may apply.
+
+## 1 · Core Goals to Engineer For
+Requirement	Why it matters
+Offline-first, sync-later	Villages may have only Bluetooth, LoRa, or intermittent Starlink.
+Double-entry mutual credit	Balances always net to zero; internal consistency is provable.
+Built-in tax splits	Treasury accounts auto-collect % slices from every transaction.
+Multi-ledger routing	Trust-lines let communities & travelling members trade across borders.
+Strong crypto identity	One DID/keypair controls many local accounts; signatures are tamper-evident.
+Human-readable UX	Should feel like Venmo or Signal, not a command line.
+
+## 2 · High-Level Architecture (Pluggable)
+Layer	Concrete options	Notes
+Identity & Keys	did:key, Web-DID; ed25519	Deterministic from mnemonic—easy backup.
+Local Ledger	Holochain + hREA • Automerge CRDT log • SQLite w/ Merkle proofs	Must run on Android, iOS, Linux.
+Gossip & Transport	LibP2P (BLE, Wi-Fi Direct) • Nostr relays • IPFS pub-sub	Pluggable transports; same protobuf payload.
+Validation Rules	• Solidity (if L2 path chosen)	Enforce taxes, trust-line limits, path-finder.
+Path-finding / Clearing	Ripplenet-style breadth-first search	Pure function -> portable across stacks.
+Mobile / Desktop UI	Local-first store, optimistic UI.
+Governance Module	Snapshot-style off-chain voting • Holochain DNA bridge • DAO contract if on L2	Updates policy objects (tax %, credit caps…).
+
+We can prototype two stacks in parallel: (1) Holochain/hREA for agent-centric resilience, (2) Local-first CRDT + LibP2P for maximum offline freedom. Convergence later.
+
+## 3 · Data Objects (Draft)
+
+Transaction
+├─ id, timestamp
+├─ lines[]  // debit/credit splits incl. tax
+├─ memo, skill_tag
+└─ signatures[ from, to ]
+
+TrustLine
+├─ from_account
+├─ to_account
+├─ credit_limit
+├─ exchange_rate
+└─ signatures[ both treasurers ]
+
+Policy
+├─ total_tax_rate
+├─ route_map        // % → treasury accounts
+├─ max_neg_balance
+└─ version, sigs
+
+## 4 · Skill Sets We Need
+Area	Skills / Tools	Nice-to-haves
+Cryptography	ed25519, DID spec, key-derivation	ZK-proofs for selective balance disclosure
+P2P / Networking	LibP2P, Nostr protocol, IPFS	Low-power radios (LoRa, Meshtastic)
+Holochain DNA, hREA, WASM validation	Async networking, Automerge, Web-Bluetooth
+Solidity / L2 (optional)	Hardhat, Optimism, Foundry tests	ERC-3643 style identity hooks
+Mobile UX, offline-first patterns	Multilingual, RTL layout
+DevOps	GitHub Actions, cross-compile Android/iOS, code-signing	Matrix / Element bots for CI alerts
+Security Auditing	threat modelling, fuzzing	Formal methods (TLA+, S-D logic)
+Community & Docs	Markdown, Diagrams.net, Sphinx	Tutorial video editing
+
+## 5 · Immediate Next Steps
+
+    Pick the MVP stack → vote between Holochain DNA vs TS CRDT + LibP2P.
+
+    Define v0 Data Contract → lock field names, signature scheme, tax algorithm.
+
+    Spike a CLI prototype → prove transaction signing, offline sync, tax validation.
+
+    Draft Governance Template → YAML/JSON file describing limits & tax splits.
+
+    Open Issues for Each Skill-Need → let newcomers grab what excites them.
+
+## 6 · Repo Structure Proposal
+
+common-credit/
+├─ README.md
+├─ LICENSE          # AGPL-3.0
+├─ specs/
+│   ├─ data-contract.md
+│   └─ tax-algorithm.md
+├─ crates/          # 
+├─ packages/        # Javascript libs
+├─ mobile/          # 
+├─ examples/
+└─ docs/
+
+## 7 · Open Invitation
+
+If you hack Android, Javascript, networking stacks, or just love resilient community tools, open an issue or join the discussion thread!
+Our mantra: “Even if the money tap turns off, cooperation must not.”
